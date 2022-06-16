@@ -1,0 +1,202 @@
+:root {
+    --mainColour: beige;
+    --secondaryColour: darkslategrey;
+    --tertiaryColour: darkorange;
+    --tertiaryColour2: orange;
+}
+
+html, body {
+    background-color: var(--mainColour);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+p, label {
+    margin: 0;
+    padding: 5px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+.column {
+    width: 20%;
+    text-align: center;
+    float: left;
+    color: var(--mainColour)
+}
+
+.options:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Header Buttons */
+.headerButton {
+    font-size: 15px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+    margin-top: 22px;
+    margin-bottom: 3px;
+    padding: 5px;
+    background-color: var(--mainColour);
+    border: none;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.headerButton:hover {
+    transform: scale(1.2);
+}
+
+/* Dropdowns */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdownOptions {
+    display: none;
+    position: absolute;
+    background-color: var(--tertiaryColour);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 200;
+    cursor: pointer;
+}
+
+.dropdownOptions p {
+    color: var(--mainColour);
+    padding: 12px;
+    margin: 0;
+}
+
+.dropdown:hover .dropdownOptions {
+    display: block;
+}
+
+.dropdown:hover .headerButton {
+    transform: scale(1.2);
+}
+
+.dropdownOptions p:hover {
+    background-color: var(--tertiaryColour2);
+}
+
+/* Slider */
+.slider {
+    appearance: none;
+    margin: 0;
+    background-color: var(--mainColour);
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--tertiaryColour);
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Checkbox */
+.box {
+    display: block;
+    position: relative;
+    text-align: left;
+    padding-left: 30%;
+    cursor: pointer;    
+}
+
+.box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox {
+    position: absolute;
+    top: 28%;
+    left: 20%;
+    height: 15px;
+    width: 15px;
+    background-color: var(--mainColour);
+}
+
+.box:hover input ~ .checkbox {
+    opacity: 0.7;
+}
+
+.box input:checked ~ .checkbox {
+    background-color: var(--tertiaryColour);
+}
+
+.box input:checked ~ .checkbox:after {
+    display: block;
+}
+
+.checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.box .checkbox:after {
+    left: 5px;
+    top: 2px;
+    width: 3px;
+    height: 7px;
+    border: solid var(--mainColour);
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Bars */
+.bar {
+    background-color: var(--secondaryColour);
+    margin-right: 1px;
+    display: inline-block;
+}
+
+#pageHeading {
+    text-align: center;
+    color: var(--mainColour);
+    margin: 0;
+    padding-bottom: 0.6%;
+    font-family: 'Segoe UI';
+}
+
+#topSection {
+    background-color: var(--secondaryColour);
+    width: 100vw;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#container {
+    text-align: center;
+}
+
+#barChart {
+    position: relative;
+    height: 350px;
+    text-align: center;
+    transform: scaleY(-1);
+}
+
+#algoTitle {
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    text-align: center;
+    font-family: 'Segoe UI';
+    color: var(--tertiaryColour);
+}
+

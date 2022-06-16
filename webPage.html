@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="Algorithm, Visualizer, Sorting">
+        <meta name="author" content="Aidan LoStracco">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Algorithm Visualizer</title>
+        <link rel="stylesheet" href="styleSheet.css">
+        <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
+    </head>
+    <body>
+        <header id="topSection">
+            <div id="bob">
+                <h2 id="pageHeading">Sorting Algorithm Visualizer</h2>
+            </div>
+            <div class="options">
+                <div class="column">
+                    <div class="dropdown">
+                        <button class="headerButton">Select Algorithm</button>
+                        <div class="dropdownOptions">
+                            <p onclick="changeAlgo('Bubble Sort')">Bubble Sort</p>
+                            <p onclick="changeAlgo('Heap Sort')">Heap Sort</p>
+                            <p onclick="changeAlgo('Insertion Sort')">Insertion Sort</p>
+                            <p onclick="changeAlgo('Merge Sort')">Merge Sort</p>
+                            <p onclick="changeAlgo('Quick Sort')">Quick Sort</p>
+                            <p onclick="changeAlgo('Selection Sort')">Selection Sort</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <p>Speed</p>
+                    <input id="speed" class="slider" type="range" min="1" max="5" value="3"/>
+                </div>
+                <div class="column">
+                    <button id="startButton" class="headerButton" onclick=startStopButton()>Start</button>
+                </div>
+                <div class="column">
+                    <p>Size</p>
+                    <input id="size" class="slider" type="range" min="5" max="200" value="100" oninput="generateChart(this.value)"/>
+                </div>
+                <div class="column">
+                    <label class="box">Bars
+                        <input type="checkbox" checked="checked"/>
+                        <span class="checkbox"></span>
+                    </label>
+                    <label class="box">Numbers
+                        <input type="checkbox"/>
+                        <span class="checkbox"></span>
+                    </label>
+                </div>
+            </div>
+        </header>
+        <h4 id="algoTitle">Bubble Sort</h4>
+        <div id="barChart">    
+        </div>
+        <script src="functionality.js"></script>
+        <script src="sortAlgos.js"></script>
+    </body>
+</html>
