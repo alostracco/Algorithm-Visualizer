@@ -54,4 +54,22 @@ async function insertion() {
     }
 }
 
+async function selection() {
+    var speed = algoSpeed();
+    var barChart = document.getElementById("barChart");
+    var barsList = barChart.childNodes;
+    for (var i = 0; i < barsList.length; i++) {
+        var smallestBarIndex = i;
+        for (var j = i+1; j < barsList.length; j++) {
+            if (Number(barsList[j].textContent) < Number(barsList[smallestBarIndex].textContent)) smallestBarIndex = j;
+        }
+        barsList[smallestBarIndex].parentNode.insertBefore(barsList[smallestBarIndex], barsList[i]);
+        barsList[i+1].parentNode.insertBefore(barsList[i+1], barsList[smallestBarIndex+1]);
+    }
+}
 
+async function heap() {
+    var speed = algoSpeed();
+    var barChart = document.getElementById("barChart");
+    var barsList = barChart.childNodes;
+}

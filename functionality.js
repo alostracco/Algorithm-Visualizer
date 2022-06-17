@@ -5,6 +5,7 @@ function startStopButton() {
         var title = document.getElementById("algoTitle").innerHTML;
         if (title == "Bubble Sort") bubble();
         else if (title == "Insertion Sort") insertion();
+        else if (title == "Selection Sort") selection();
     }
     else {
         button.innerHTML = "Start";
