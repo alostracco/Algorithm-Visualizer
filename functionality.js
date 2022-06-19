@@ -3,9 +3,14 @@ function startStopButton() {
     if (button.innerHTML == "Start") {
         button.innerHTML = "Stop";
         var title = document.getElementById("algoTitle").innerHTML;
+        var barChart = document.getElementById("barChart");
+        var barsList = barChart.childNodes;
+        var endIndex = barsList.length;
         if (title == "Bubble Sort") bubble();
         else if (title == "Insertion Sort") insertion();
         else if (title == "Selection Sort") selection();
+        else if (title == "Merge Sort") merge(0, endIndex);
+        else if (title == "Quick Sort") quick(0, endIndex-1);
     }
     else {
         button.innerHTML = "Start";
