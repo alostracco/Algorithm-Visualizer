@@ -11,6 +11,7 @@ function startStopButton() {
         else if (title == "Selection Sort") selection();
         else if (title == "Merge Sort") merge(0, endIndex);
         else if (title == "Quick Sort") quick(0, endIndex-1);
+        else if (title == "Heap Sort") heap(endIndex);
     }
     else {
         button.innerHTML = "Start";
@@ -47,9 +48,9 @@ function algoSpeed() {
     var speed = document.getElementById("speed").value;
     if (speed == 1) return 1000;
     else if (speed == 2) return 500;
-    else if (speed == 3) return 100;
-    else if (speed == 4) return 20;
-    else return 2;
+    else if (speed == 3) return 50;
+    else if (speed == 4) return 5;
+    else return 0.5;
 }
 
 generateChart(document.getElementById("size").value);
