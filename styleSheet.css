@@ -2,7 +2,11 @@
     --mainColour: beige;
     --secondaryColour: darkslategrey;
     --tertiaryColour: darkorange;
-    --tertiaryColour2: orange;
+    --tertiaryColour2: #01ac9b;/*
+    --mainColour: #efe6d5;
+    --secondaryColour: #09755e;
+    --tertiaryColour: #e73213;
+    --tertiaryColour2: #fd5c40;*/
 }
 
 html, body {
@@ -107,6 +111,8 @@ p, label {
     display: block;
     position: relative;
     text-align: left;
+    padding: 0;
+    padding-top: 1%;
     padding-left: 30%;
     cursor: pointer;    
 }
@@ -121,7 +127,7 @@ p, label {
 
 .checkbox {
     position: absolute;
-    top: 28%;
+    top: 23%;
     left: 20%;
     height: 15px;
     width: 15px;

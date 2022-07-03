@@ -40,12 +40,16 @@
                     <input id="size" class="slider" type="range" min="5" max="200" value="100" oninput="generateChart(this.value)"/>
                 </div>
                 <div class="column">
-                    <label class="box">Bars
-                        <input type="checkbox" checked="checked"/>
+                    <label class="box">Style 1
+                        <input type="radio" name="colourSelector" checked="checked" onclick="changeStyle('beige', 'darkslategrey', 'darkorange', 'orange')"/>
                         <span class="checkbox"></span>
                     </label>
-                    <label class="box">Numbers
-                        <input type="checkbox"/>
+                    <label class="box">Style 2
+                        <input type="radio" name="colourSelector" onclick="changeStyle('#01C8EE', '#101B37', '#E41376', '#ED5EA1')"/>
+                        <span class="checkbox"></span>
+                    </label>
+                    <label class="box">Style 3
+                        <input type="radio" name="colourSelector" onclick="changeStyle('#F6F0F0', '#0567A8', '#60E3D5', '#01AC9B')"/>
                         <span class="checkbox"></span>
                     </label>
                 </div>

@@ -9,7 +9,7 @@ function startStopButton() {
         if (title == "Bubble Sort") bubble();
         else if (title == "Insertion Sort") insertion();
         else if (title == "Selection Sort") selection();
-        else if (title == "Merge Sort") merge(0, endIndex);
+        else if (title == "Merge Sort") merge(0, endIndex, true);
         else if (title == "Quick Sort") quick(0, endIndex-1);
         else if (title == "Heap Sort") heap(endIndex);
     }
@@ -57,37 +57,12 @@ generateChart(document.getElementById("size").value);
 
 function changeAlgo(title) {
     document.getElementById("algoTitle").innerHTML = title;
-
 }
 
-/*
-function sliderChange(datasetSize) {
-    var values = [];
-
-    for (let i = 0; i < datasetSize; i++) {
-        var randomNum = randomNumGenerator(1, datasetSize * 3);
-        values.push(randomNum); 
-    }
-
-    var data = [{
-        y: values,
-        marker: {color: getColourVar("--secondaryColour")},
-        type: "bar"
-    }];
-    var layout = {
-        title: "Blank Sort",
-        plot_bgcolor:"rgba(0,0,0,0)",
-        paper_bgcolor:"rgba(0,0,0,0)",
-        xaxis: {
-            showticklabels: false
-        },
-        yaxis: {
-            showgrid: false,
-            showticklabels: false,
-            zeroline: false
-        }
-    };
-    Plotly.newPlot("barChart", data, layout, {staticPlot: true});
+function changeStyle(col1, col2, col3A, col3B) {
+    var root = document.querySelector(":root");
+    root.style.setProperty("--mainColour", col1);
+    root.style.setProperty("--secondaryColour", col2);
+    root.style.setProperty("--tertiaryColour", col3A);
+    root.style.setProperty("--tertiaryColour2", col3B);
 }
-*/
-
