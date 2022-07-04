@@ -28,7 +28,9 @@ function getColourVar(variable) {
 }
 
 function generateChart(datasetSize) {
+    chartHeight = screen.height*0.65
     var barChart = document.getElementById("barChart");
+    barChart.style.height = chartHeight + "px"
     while (barChart.firstChild) {
         barChart.removeChild(barChart.firstChild);
     }
@@ -36,7 +38,7 @@ function generateChart(datasetSize) {
         var randomNum = randomNumGenerator(5, 1000);
         var divElement = document.createElement("div");
         divElement.classList.add("bar");
-        divElement.style.height = (randomNum/3)+"px";
+        divElement.style.height = (randomNum/1000*chartHeight)+"px";
         divElement.style.width = (1000/datasetSize)+"px";
         divElement.innerHTML = randomNum;
         divElement.style.fontSize = 0; 
