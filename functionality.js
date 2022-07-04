@@ -68,3 +68,11 @@ function changeStyle(col1, col2, col3A, col3B) {
     root.style.setProperty("--tertiaryColour", col3A);
     root.style.setProperty("--tertiaryColour2", col3B);
 }
+
+function openMenu() {
+    document.getElementById("menu").style.width = "100%";
+}
+
+function closeMenu() {
+    document.getElementById("menu").style.width = "0%";
+}
