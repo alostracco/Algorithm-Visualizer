@@ -1,4 +1,18 @@
-const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
+//const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
+async function delay(ms) {
+    return new Promise(function(resolve, reject) {
+        var stopButton = document.getElementById("startButton")
+        if (stopButton.innerHTML == "Start") {
+            var barChart = document.getElementById("barChart");
+            var barsList = barChart.childNodes;
+            for (var i = 0; i < barsList.length; i++) {
+                barsList[i].style.backgroundColor = getColourVar("--secondaryColour");
+            }
+            return;
+        }
+        return setTimeout(resolve, ms);
+    })
+}
 
 function colourBars(colour, bar1, bar2) {
     bar1.style.backgroundColor = colour;
