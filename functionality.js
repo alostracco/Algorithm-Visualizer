@@ -28,7 +28,7 @@ function getColourVar(variable) {
 }
 
 function generateChart(datasetSize) {
-    chartHeight = screen.height*0.65
+    chartHeight = screen.height-360
     var barChart = document.getElementById("barChart");
     barChart.style.height = chartHeight + "px"
     while (barChart.firstChild) {
