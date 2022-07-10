@@ -23,7 +23,10 @@ function getColourVar(variable) {
     return getComputedStyle(root).getPropertyValue(variable);
 }
 
-function generateGrid(nodeSideLength) {
+function generateGrid(sliderValue) {
+    if (sliderValue == 1) var nodeSideLength = 50;
+    else if (sliderValue == 2) var nodeSideLength = 25;
+    else var nodeSideLength = 10;
     var grid = document.getElementById("grid");
     
     var topSection = document.getElementById("topSection");
@@ -34,7 +37,9 @@ function generateGrid(nodeSideLength) {
 
     var numNodesInRow = grid.clientWidth/nodeSideLength;
     var numRows = gridHeight/nodeSideLength;
-
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
     for (var i = 0; i < numRows; i++) {
         var rowDiv = document.createElement("div");
         rowDiv.classList.add("row");
@@ -43,9 +48,21 @@ function generateGrid(nodeSideLength) {
             var node = document.createElement("div");
             var newID = "node_" + i + "_" + j;
             node.classList.add("node");
+            node.style.setProperty("height", (nodeSideLength-1)+"px");
+            node.style.setProperty("width", (nodeSideLength-1)+"px");
+            if (i == Math.floor(numRows/2) && j == Math.floor(numNodesInRow/4)) {
+                node.classList.add("start");
+                node.setAttribute("onmousedown", "activateDrag(" + true + ")");
+            }
+            else if (i == Math.floor(numRows/2) && j == Math.floor(numNodesInRow/4*3)) {
+                node.classList.add("target");
+                node.setAttribute("onmousedown", "activateDrag(" + false + ")");
+            }
             node.id = newID;
             node.setAttribute("onmouseover", "drawWall(\'" + newID + "\', false)");
             node.setAttribute("onclick", "drawWall(\'" + newID + "\', \'true\')");
+            node.setAttribute("onmouseenter", "dragNodeIn(\'" + newID + "\')");
+            node.setAttribute("onmouseout", "dragNodeOut(\'" + newID + "\')");
             rowDiv.appendChild(node);
         }
     }
@@ -60,7 +77,7 @@ function algoSpeed() {
     else return 0.5;
 }
 
-generateGrid(25);
+generateGrid(2);
 
 function changeAlgo(title) {
     document.getElementById("algoTitle").innerHTML = title;
@@ -83,18 +100,82 @@ function closeMenu() {
 }
 
 var mouseDown = false;
+var nodeDragging = false;
+var startPressed = false;
+var targetPressed = false;
 
 function activateWalls() {
+    if (nodeDragging) return;
     mouseDown = true;
 }
 
 function deactivateWalls() {
+    if (startPressed) deactivateDrag(true);
+    else if (targetPressed) deactivateDrag(false);
     mouseDown = false;
 }
 
 function drawWall(id, isClicked) {
     if (mouseDown || isClicked) {
         var node = document.getElementById(id);
-        node.style.backgroundColor = "black";
+        if (node.classList.contains("start") || node.classList.contains("target")) return;
+        if (isClicked && node.classList.contains("wall")) node.classList.remove("wall");
+        else node.classList.add("wall");
     }
+}
+
+
+function activateDrag(isStartNode) {
+    if (isStartNode) {
+        startPressed = true;
+        var node = document.getElementsByClassName("start");
+    } else {
+        targetPressed = true;
+        var node = document.getElementsByClassName("target");
+    }
+    nodeDragging = true;
+    node[0].removeAttribute("onmousedown");
+}
+
+function deactivateDrag(isStartNode) {
+    if (isStartNode) {
+        startPressed = false;
+        var node = document.getElementsByClassName("start");
+        node[0].setAttribute("onmousedown", "activateDrag(" + true + ")");
+    } else {
+        targetPressed = false;
+        var node = document.getElementsByClassName("target");
+        node[0].setAttribute("onmousedown", "activateDrag(" + false + ")");
+    }
+    nodeDragging = false;
+}
+
+function dragNodeIn(id) {
+    var node = document.getElementById(id);
+    if (startPressed) {
+        node.classList.add("start");
+    } else if (targetPressed) {
+        node.classList.add("target");
+    }
+}
+
+function dragNodeOut(id) {
+    var node = document.getElementById(id);
+    if (startPressed) {
+        node.classList.remove("start");
+    } else if (targetPressed) {
+        node.classList.remove("target");
+    }
+}
+
+class node {
+
+    constructor(id, row, column) {
+        this.id = id;
+        this.row = row;
+        this.column = column;
+        this.nodeClass = "node";
+    }
+
+
 }

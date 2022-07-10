@@ -20,8 +20,15 @@ p, label {
     font-weight: 500;
 }
 
-.column {
+.sortColumn {
     width: 20%;
+    text-align: center;
+    float: left;
+    color: var(--mainColour)
+}
+
+.pathfindColumn {
+    width: 14.28%;
     text-align: center;
     float: left;
     color: var(--mainColour)
@@ -209,7 +216,7 @@ p, label {
 }
 
 .row {
-    height: 25px;
+    
     display: flex;
 }
 
@@ -221,11 +228,25 @@ p, label {
     position: relative;
     border-right: 1px solid var(--secondaryColour);
     border-top: 1px solid var(--secondaryColour);
-    transition: background-color 0.5s;
+    
 }
 
 .node:hover {
     opacity: 0.8;
+}
+
+.wall {
+    background-color: black;
+}
+
+.start {
+    background-color: green;
+    cursor: pointer;
+}
+
+.target {
+    background-color: var(--tertiaryColour);
+    cursor: pointer;
 }
 
 

@@ -13,17 +13,17 @@
         <nav id="menu" class="menuScreen">
             <a href="javascript:void(0)" id="closeButton" onclick=closeMenu()>&times;</a>
             <div class="menuScreen-content">
-                <a href="../sort/sorting-algo.html">Sorting Algorithm Visualizer</a>
-                <a href="../pathfind/pathfinding-algo.html">Pathfinding Algorithm Visualizer</a>
+                <a href="../sort/sorting-algo.html">Sorting Visualizer</a>
+                <a href="../pathfind/pathfinding-algo.html">Pathfinding Visualizer</a>
             </div>
         </nav>
         <header id="topSection">
             <div>
                 <p id="menuButton" onclick="openMenu()">&#9776;</p>
-                <h2 id="pageHeading">Pathfinding Algorithm Visualizer</h2>
+                <h2 id="pageHeading">Pathfinding Visualizer</h2>
             </div>
             <div class="options">
-                <div class="column">
+                <div class="pathfindColumn">
                     <div class="dropdown">
                         <button class="headerButton">Select Algorithm</button>
                         <div class="dropdownOptions">
@@ -34,18 +34,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="column">
+                <div class="pathfindColumn">
                     <p>Speed</p>
                     <input id="speed" class="slider" type="range" min="1" max="5" value="3"/>
                 </div>
-                <div class="column">
+                <div class="pathfindColumn">
+                    <p>Size</p>
+                    <input id="size" class="slider" type="range" min="1" max="3" value="2" oninput="generateGrid(this.value)"/>
+                </div>
+                <div class="pathfindColumn">
                     <button id="startButton" class="headerButton" onclick=startStopButton()>Visualize</button>
                 </div>
-                <div class="column">
-                    <p>Size</p>
-                    <input id="size" class="slider" type="range" min="5" max="200" value="100" oninput="generateChart(this.value)"/>
+                <div class="pathfindColumn">
+                    <div class="dropdown">
+                        <button class="headerButton">Clear Options</button>
+                        <div class="dropdownOptions">
+                            <p onclick="changeAlgo('Dijkstra\'s Algorithm')">Clear Walls</p>
+                            <p onclick="changeAlgo('Breadth First Search')">Clear Path</p>
+                            <p onclick="changeAlgo('Depth First Search')" style="font-size: 14px">Clear Board</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
+                <div class="pathfindColumn">
+                    <div class="dropdown">
+                        <button class="headerButton">Select Algorithm</button>
+                        <div class="dropdownOptions">
+                            <p onclick="changeAlgo('Dijkstra\'s Algorithm')">Dijkstra's Algorithm</p>
+                            <p onclick="changeAlgo('Breadth First Search')">Breadth First Search</p>
+                            <p onclick="changeAlgo('Depth First Search')">Depth First Search</p>
+                            <p onclick="changeAlgo('A* Search')">A* Search</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pathfindColumn">
                     <label class="box">Style 1
                         <input type="radio" name="colourSelector" checked="checked" onclick="changeStyle('beige', 'darkslategrey', 'darkorange', 'orange')"/>
                         <span class="checkbox"></span>
