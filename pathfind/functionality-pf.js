@@ -6,12 +6,10 @@ function startStopButton() {
         button.innerHTML = "Stop";
         var title = document.getElementById("algoTitle").innerHTML;
         var endIndex = barsList.length;
-        if (title == "Bubble Sort") bubble();
-        else if (title == "Insertion Sort") insertion();
-        else if (title == "Selection Sort") selection();
-        else if (title == "Merge Sort") merge(0, endIndex, true);
-        else if (title == "Quick Sort") quick(0, endIndex-1);
-        else if (title == "Heap Sort") heap(endIndex);
+        if (title == "Dijkstra\'s Algorithm") dijkstra();
+        else if (title == "Breadth First Search") bfs();
+        else if (title == "Depth First Search") dfs();
+        else if (title == "A* Search") Astar();
     }
     else {
         button.innerHTML = "Visualize";
@@ -165,6 +163,14 @@ function dragNodeOut(id) {
         node.classList.remove("start");
     } else if (targetPressed) {
         node.classList.remove("target");
+    }
+}
+
+function clearWalls() {
+    var walls = document.getElementsByClassName("wall");
+    var numWalls = walls.length;
+    for (var wallNode = 0; wallNode < numWalls; wallNode++) {
+        walls[0].classList.remove("wall");
     }
 }
 
