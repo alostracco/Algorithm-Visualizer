@@ -239,13 +239,17 @@ p, label {
     background-color: black;
 }
 
+.visited {
+    background-color: var(--tertiaryColour);
+}
+
 .start {
     background-color: green;
     cursor: pointer;
 }
 
 .target {
-    background-color: var(--tertiaryColour);
+    background-color: red;
     cursor: pointer;
 }
 

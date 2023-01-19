@@ -1,4 +1,3 @@
-//const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
 async function delay(ms) {
     return new Promise(function(resolve, reject) {
         var stopButton = document.getElementById("startButton")
@@ -65,22 +64,28 @@ async function insertion() {
         var curBar = barsList[i];
         var prevBar = barsList[i-1];
         var prevBarIndex = i-1;
-        colourBars("red", curBar);
+        colourBars("green", curBar, prevBar);
         var needsSwap = false;
-        while (Number(curBar.textContent) < Number(prevBar.textContent)) {
+        while (prevBarIndex >= 0 && Number(curBar.textContent) < Number(barsList[prevBarIndex].textContent)) {
             needsSwap = true;
-            colourBars("green", prevBar);
+            colourBars("green", barsList[prevBarIndex]);
             await delay(speed);
-            colourBars(getColourVar("--secondaryColour"), prevBar);
+            colourBars(getColourVar("--tertiaryColour"), barsList[prevBarIndex]);
             await delay(speed);
-            if (prevBarIndex == 0) break;
-            prevBar = barsList[--prevBarIndex]; 
+            prevBarIndex--;
         }
-        if (prevBarIndex == 0) 
-            prevBar = barsList[prevBarIndex];
-        else prevBar = barsList[++prevBarIndex];
+        if (needsSwap) {
+            prevBar = barsList[++prevBarIndex]; 
+            colourBars("red", curBar);
+            await delay(speed);
             curBar.parentNode.insertBefore(curBar, prevBar);
-        
+            await delay(speed);
+        }
+        colourBars(getColourVar("--tertiaryColour"), curBar, barsList[1]);
+        colourBars(getColourVar("--tertiaryColour"), barsList[0]);
+    }
+    for (var i = 1; i < barsList.length; i++) {
+        colourBars(getColourVar("--tertiaryColour"), barsList[i]);
     }
 }
 
@@ -139,7 +144,11 @@ async function mergeCombine(left, right, isSameLength, isFirstCall) {
         left++;
         if (!isFirstCall) colourBars(getColourVar("--secondaryColour"), barsList[left]);
     }
-    if (isFirstCall) colourBars(getColourVar("--tertiaryColour"), barsList[barsList.length-1]);
+    if (isFirstCall) {
+        for (let i = barsList.length-1; i >= 0; i--) {
+            colourBars(getColourVar("--tertiaryColour"), barsList[i]);
+        }
+    }
 }
 
 async function merge(startIndex, endIndex, isFirstCall) {
@@ -168,8 +177,9 @@ async function quickCombine(left, right) {
     var low = left + 1;
     var high = right;
     colourBars("green", barsList[low], barsList[high]);
+    await delay(speed);
     while (low <= high) {
-        while (Number(barsList[high].textContent) > pivot) {
+        while (low <= high && Number(barsList[high].textContent) > pivot) {
             colourBars(getColourVar("--secondaryColour"), barsList[high]);
             high--;
             colourBars("green", barsList[high]);
@@ -178,7 +188,7 @@ async function quickCombine(left, right) {
         while (low <= high && Number(barsList[low].textContent) <= pivot) {
             colourBars(getColourVar("--secondaryColour"), barsList[low]);
             low++;
-            colourBars("green", barsList[low]);
+            if (low <= high) colourBars("green", barsList[low]);
             await delay(speed);
         }
         if (low <= high) {
@@ -190,56 +200,79 @@ async function quickCombine(left, right) {
             colourBars(getColourVar("--secondaryColour"), barsList[low], barsList[high]);
             low++;
             high--;
+        } else {
+            if (low < barsList.length) colourBars(getColourVar("--secondaryColour"), barsList[low], barsList[high]);
         }
     }
     colourBars("red", barsList[left], barsList[high]);
     await delay(speed);
     barsList[high].parentNode.insertBefore(barsList[high], barsList[left]);
     barsList[left+1].parentNode.insertBefore(barsList[left+1], barsList[high+1]);
-    colourBars(getColourVar("--secondaryColour"), barsList[left], barsList[high]);
+    colourBars(getColourVar("--secondaryColour"), barsList[left]);
+    colourBars(getColourVar("--tertiaryColour"), barsList[high]);
     return high;
 }
 
 async function quick(left, right) {
+    var barChart = document.getElementById("barChart");
+    var barsList = barChart.childNodes;
     if (left >= right) return;
     var partition = await quickCombine(left, right);
     await quick(left, partition-1);
+    for (var i = left; i <= partition-1; i++) {
+        colourBars(getColourVar("--tertiaryColour"), barsList[i]);
+    }
     await quick(partition+1, right);
+    for (var i = partition; i <= right; i++) {
+        colourBars(getColourVar("--tertiaryColour"), barsList[i]);
+    }
 }
 
-function heapify(len, index) {
+async function heapify(len, index) {
     var speed = algoSpeed();
     var barChart = document.getElementById("barChart");
     var barsList = barChart.childNodes;
-
     var largest = index;
     var leftChild = 2 * index + 1;
     var rightChild = 2 * index + 2;
-
+    colourBars("green", barsList[largest]);
     if (leftChild < len && Number(barsList[leftChild].textContent) > Number(barsList[largest].textContent)) {
         largest = leftChild;
     }
     if (rightChild < len && Number(barsList[rightChild].textContent) > Number(barsList[largest].textContent)) {
         largest = rightChild;
     }
+    colourBars("green", barsList[largest]);
+    await delay(speed);
     if (largest != index) {
+        colourBars("red", barsList[largest], barsList[index]);
+        await delay(speed);
         barsList[largest].parentNode.insertBefore(barsList[largest], barsList[index]);
         barsList[index+1].parentNode.insertBefore(barsList[index+1], barsList[largest+1]);
-        heapify(len, largest);
+        await delay(speed);
+        colourBars("green", barsList[largest], barsList[index]);
+        await delay(speed);
+        colourBars(getColourVar("--secondaryColour"), barsList[largest], barsList[index]);
+        await heapify(len, largest);
+    } else {
+        colourBars(getColourVar("--secondaryColour"), barsList[largest]);
     }
 }
 
-function heap(len) {
+async function heap(len) {
     var speed = algoSpeed();
     var barChart = document.getElementById("barChart");
     var barsList = barChart.childNodes;
 
     for (var i = parseInt(len / 2 - 1); i >= 0; i--) {
-        heapify(len, i);
+        await heapify(len, i);
     }
     for (var i = len - 1; i >= 0; i--) {
+        await delay(speed);
+        colourBars(getColourVar("--tertiaryColour"), barsList[0]);
         barsList[i].parentNode.insertBefore(barsList[i], barsList[0]);
         barsList[1].parentNode.insertBefore(barsList[1], barsList[i+1]);
-        heapify(i, 0);
+        await heapify(i, 0);
     }
+    colourBars(getColourVar("--tertiaryColour"), barsList[0]);
 }

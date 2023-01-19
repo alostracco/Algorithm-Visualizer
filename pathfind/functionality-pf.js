@@ -1,11 +1,8 @@
 function startStopButton() {
     var button = document.getElementById("startButton");
-    var barChart = document.getElementById("barChart");
-    var barsList = barChart.childNodes;
     if (button.innerHTML == "Visualize") {
         button.innerHTML = "Stop";
         var title = document.getElementById("algoTitle").innerHTML;
-        var endIndex = barsList.length;
         if (title == "Dijkstra\'s Algorithm") dijkstra();
         else if (title == "Breadth First Search") bfs();
         else if (title == "Depth First Search") dfs();
@@ -21,6 +18,9 @@ function getColourVar(variable) {
     return getComputedStyle(root).getPropertyValue(variable);
 }
 
+var numNodesInRow;
+var numRows;
+
 function generateGrid(sliderValue) {
     if (sliderValue == 1) var nodeSideLength = 50;
     else if (sliderValue == 2) var nodeSideLength = 25;
@@ -33,8 +33,8 @@ function generateGrid(sliderValue) {
     var gridHeight = body.clientHeight - topHeight;
     grid.style.height = gridHeight + "px";
 
-    var numNodesInRow = grid.clientWidth/nodeSideLength;
-    var numRows = gridHeight/nodeSideLength;
+    numNodesInRow = grid.clientWidth/nodeSideLength;
+    numRows = gridHeight/nodeSideLength;
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
@@ -66,6 +66,34 @@ function generateGrid(sliderValue) {
     }
 }
 
+generateGrid(2);
+
+function createGraph() {
+    var graph = new Graph(numNodesInRow*numRows);
+    for (var i = 0; i < numRows; i++) {
+        for (var j = 0; j < numNodesInRow; j++) {
+            var curNode = document.getElementById("node_" + i + "_" + j);
+            graph.addNode(curNode);
+        }
+    }
+    for (var i = 0; i < Math.ceil(numRows); i++) {
+        for (var j = Math.ceil(numNodesInRow)-1; j >= 0 ; j--) {
+            var curNode = document.getElementById("node_" + i + "_" + j);
+            if (j != Math.ceil(numNodesInRow)-1) {
+                var rightID = j+1;
+                var rightNode = document.getElementById("node_" + i + "_" + rightID);
+                graph.addEdge(curNode, rightNode);
+            }
+            if (i != Math.ceil(numRows)-1) {
+                var downID = i+1;
+                var downNode = document.getElementById("node_" + downID + "_" + j);
+                graph.addEdge(curNode, downNode);
+            }
+        }
+    }
+    return graph;
+}
+
 function algoSpeed() {
     var speed = document.getElementById("speed").value;
     if (speed == 1) return 1000;
@@ -75,7 +103,7 @@ function algoSpeed() {
     else return 0.5;
 }
 
-generateGrid(2);
+
 
 function changeAlgo(title) {
     document.getElementById("algoTitle").innerHTML = title;
@@ -174,14 +202,4 @@ function clearWalls() {
     }
 }
 
-class node {
 
-    constructor(id, row, column) {
-        this.id = id;
-        this.row = row;
-        this.column = column;
-        this.nodeClass = "node";
-    }
-
-
-}
