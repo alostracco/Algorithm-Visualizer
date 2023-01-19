@@ -46,8 +46,8 @@ function generateGrid(sliderValue) {
             var node = document.createElement("div");
             var newID = "node_" + i + "_" + j;
             node.classList.add("node");
-            node.style.setProperty("height", (nodeSideLength-1)+"px");
-            node.style.setProperty("width", (nodeSideLength-1)+"px");
+            node.style.setProperty("height", (nodeSideLength)+"px");
+            node.style.setProperty("width", (nodeSideLength)+"px");
             if (i == Math.floor(numRows/2) && j == Math.floor(numNodesInRow/4)) {
                 node.classList.add("start");
                 node.setAttribute("onmousedown", "activateDrag(" + true + ")");
@@ -199,6 +199,14 @@ function clearWalls() {
     var numWalls = walls.length;
     for (var wallNode = 0; wallNode < numWalls; wallNode++) {
         walls[0].classList.remove("wall");
+    }
+}
+
+function clearPath() {
+    var visitedNodes = document.getElementsByClassName("visited");
+    var numVisited = visitedNodes.length;
+    for (var curNode = 0; curNode < numVisited; curNode++) {
+        visitedNodes[0].classList.remove("visited");
     }
 }
 

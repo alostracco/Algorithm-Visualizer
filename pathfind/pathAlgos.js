@@ -2,6 +2,9 @@ async function delay(ms) {
     return new Promise(function(resolve, reject) {
         var stopButton = document.getElementById("startButton")
         if (stopButton.innerHTML == "Visualize") {
+            curNode = document.getElementsByClassName("current")[0];
+            curNode.classList.remove("current");
+            curNode.classList.add("visited");
             return;
         }
         return setTimeout(resolve, ms);
@@ -18,18 +21,19 @@ async function bfs() {
     var speed = algoSpeed();
     var queue = [];
     var curNode = document.getElementsByClassName("start")[0];
-    console.log("yes");
-    curNode.classList.add("visited");
+    curNode.classList.add("current");
     queue.push(curNode);
     while (queue.length) {
-        console.log("yes");
         curNode = queue.shift();
         var neighbours = graph.incidentEdges(curNode);
         for (var nextNode of neighbours) {
-            if (!(nextNode.classList.contains("wall") || nextNode.classList.contains("visited"))) {
+            if (!(nextNode.classList.contains("wall") || nextNode.classList.contains("visited") || nextNode.classList.contains("current"))) {
                 await delay(speed);
+                curNode = document.getElementsByClassName("current")[0];
+                curNode.classList.remove("current");
+                curNode.classList.add("visited");
                 if (nextNode.classList.contains("target")) return;
-                nextNode.classList.add("visited");
+                nextNode.classList.add("current");
                 queue.push(nextNode);
             }
         }

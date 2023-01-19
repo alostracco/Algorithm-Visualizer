@@ -241,6 +241,11 @@ p, label {
 
 .visited {
     background-color: var(--tertiaryColour);
+    transition: 1s;
+}
+
+.current {
+    background-color: yellow;
 }
 
 .start {
