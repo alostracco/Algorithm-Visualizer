@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="Algorithm, Visualizer, Sorting">
+        <meta name="author" content="Aidan LoStracco">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Algorithm Visualizer</title>
+        <link rel="stylesheet" href="../styleSheet.css">
+    </head>
+    <body>
+        <nav id="menu" class="menuScreen">
+            <a href="javascript:void(0)" id="closeButton" onclick=closeMenu()>&times;</a>
+            <div class="menuScreen-content">
+                <a href="../sort/sorting-algo.html">Sorting Visualizer</a>
+                <a href="../pathfind/pathfinding-algo.html">Pathfinding Visualizer</a>
+            </div>
+        </nav>
+        <header id="topSection">
+            <div>
+                <p id="menuButton" onclick="openMenu()">&#9776;</p>
+                <h2 id="pageHeading">Sorting Visualizer</h2>
+            </div>
+            <div class="options">
+                <div class="sortColumn">
+                    <div class="dropdown">
+                        <button class="headerButton">Select Algorithm</button>
+                        <div class="dropdownOptions">
+                            <p onclick="changeAlgo('Bubble Sort')">Bubble Sort</p>
+                            <p onclick="changeAlgo('Heap Sort')">Heap Sort</p>
+                            <p onclick="changeAlgo('Insertion Sort')">Insertion Sort</p>
+                            <p onclick="changeAlgo('Merge Sort')">Merge Sort</p>
+                            <p onclick="changeAlgo('Quick Sort')">Quick Sort</p>
+                            <p onclick="changeAlgo('Selection Sort')">Selection Sort</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sortColumn">
+                    <p>Speed</p>
+                    <input id="speed" class="slider" type="range" min="1" max="5" value="3"/>
+                </div>
+                <div class="sortColumn">
+                    <button id="startButton" class="headerButton" onclick=startStopButton()>Visualize</button>
+                </div>
+                <div class="sortColumn">
+                    <p>Size</p>
+                    <input id="size" class="slider" type="range" min="5" max="200" value="100" oninput="generateChart(this.value)"/>
+                </div>
+                <div class="sortColumn">
+                    <label class="box">Style 1
+                        <input type="radio" name="colourSelector" checked="checked" onclick="changeStyle('beige', 'darkslategrey', 'darkorange', 'orange')"/>
+                        <span class="checkbox"></span>
+                    </label>
+                    <label class="box">Style 2
+                        <input type="radio" name="colourSelector" onclick="changeStyle('#01C8EE', '#101B37', '#E41376', '#ED5EA1')"/>
+                        <span class="checkbox"></span>
+                    </label>
+                    <label class="box">Style 3
+                        <input type="radio" name="colourSelector" onclick="changeStyle('grey', 'black', 'white', 'lightgrey')"/>
+                        <span class="checkbox"></span>
+                    </label>
+                </div>
+            </div>
+        </header>
+        <h4 id="algoTitle">Bubble Sort</h4>
+        <div id="barChart">    
+        </div>
+        <script src="functionality-s.js" defer></script>
+        <script src="sortAlgos.js" defer></script>
+    </body>
+</html>
