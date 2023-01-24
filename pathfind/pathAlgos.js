@@ -11,11 +11,6 @@ async function delay(ms) {
     })
 }
 
-function dijkstra() {
-    
-    
-}
-
 async function bfs() {
     var graph = createGraph();
     var speed = algoSpeed();
@@ -42,22 +37,23 @@ async function bfs() {
 
 async function dfs() {
     var graph = createGraph();
-    await dfsHelper(graph, document.getElementsByClassName("start")[0]);
+    await dfsHelper(graph, document.getElementsByClassName("start")[0], true);
 }
 
-async function dfsHelper(graph, curNode) {
-    if (curNode.classList.contains("target")) return true;
+async function dfsHelper(graph, curNode, firstCall) {
     var speed = algoSpeed();
     await delay(speed);
-    curNode.classList.add("visited");
+    if (!firstCall) {
+        prevNode = document.getElementsByClassName("current")[0];
+        prevNode.classList.remove("current");
+        prevNode.classList.add("visited");
+    }
+    if (curNode.classList.contains("target")) return true;
+    curNode.classList.add("current");
     var neighbours = graph.incidentEdges(curNode);
     for (var nextNode of neighbours) {
         if (!(nextNode.classList.contains("wall") || nextNode.classList.contains("visited"))) {
-            if (await dfsHelper(graph, nextNode)) return true;
+            if (await dfsHelper(graph, nextNode, false)) return true;
         }
     }
-}
-
-function Astar() {
-    
 }

@@ -27,10 +27,8 @@
                     <div class="dropdown">
                         <button class="headerButton">Select Algorithm</button>
                         <div class="dropdownOptions">
-                            <p onclick="changeAlgo('Dijkstra\'s Algorithm')">Dijkstra's Algorithm</p>
                             <p onclick="changeAlgo('Breadth First Search')">Breadth First Search</p>
                             <p onclick="changeAlgo('Depth First Search')">Depth First Search</p>
-                            <p onclick="changeAlgo('A* Search')">A* Search</p>
                         </div>
                     </div>
                 </div>
@@ -57,12 +55,9 @@
                 </div>
                 <div class="pathfindColumn">
                     <div class="dropdown">
-                        <button class="headerButton">Select Algorithm</button>
+                        <button class="headerButton">Select Maze</button>
                         <div class="dropdownOptions">
-                            <p onclick="changeAlgo('Dijkstra\'s Algorithm')">Dijkstra's Algorithm</p>
-                            <p onclick="changeAlgo('Breadth First Search')">Breadth First Search</p>
-                            <p onclick="changeAlgo('Depth First Search')">Depth First Search</p>
-                            <p onclick="changeAlgo('A* Search')">A* Search</p>
+                            <p onclick="randomWalls()">Random Walls</p>
                         </div>
                     </div>
                 </div>
@@ -82,12 +77,13 @@
                 </div>
             </div>
         </header>
-        <h4 id="algoTitle">Dijkstra's Algorithm</h4>
+        <h4 id="algoTitle">Breadth First Search</h4>
         <div id="grid" onmousedown="activateWalls()" onmouseup="deactivateWalls()">
 
         </div>
         <script src="functionality-pf.js" defer></script>
         <script src="pathAlgos.js" defer></script>
+        <script src="mazeAlgos.js" defer></script>
         <script src="graph.js" defer></script>
     </body>
 </html>

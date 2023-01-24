@@ -3,10 +3,8 @@ function startStopButton() {
     if (button.innerHTML == "Visualize") {
         button.innerHTML = "Stop";
         var title = document.getElementById("algoTitle").innerHTML;
-        if (title == "Dijkstra\'s Algorithm") dijkstra();
-        else if (title == "Breadth First Search") bfs();
+        if (title == "Breadth First Search") bfs();
         else if (title == "Depth First Search") dfs();
-        else if (title == "A* Search") Astar();
     }
     else {
         button.innerHTML = "Visualize";
@@ -92,6 +90,10 @@ function createGraph() {
         }
     }
     return graph;
+}
+
+function randomNumGenerator(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function algoSpeed() {
