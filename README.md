@@ -1,6 +1,6 @@
 # Algorithm-Visualizer
 
-##### By: Aidan LoStracco
+###### By: Aidan LoStracco
 
 ### Project Description
 
